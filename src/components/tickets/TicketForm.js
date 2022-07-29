@@ -14,8 +14,7 @@ export const TicketForm = () => {
         TODO: Use the useNavigation() hook so you can redirect
         the user to the ticket list
     */
-
-    const navigate = useNavigate()
+   const navigate = useNavigate()
 
     const localHoneyUser = localStorage.getItem("honey_user")
     const honeyUserObject = JSON.parse(localHoneyUser)
@@ -23,22 +22,22 @@ export const TicketForm = () => {
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-        // {
-        //     "userId": 1,
-        //     "description": "Sunt pariatur et quidem hic voluptatem. Neque aliquam voluptas eos incidunt repellendus. Vero expedita non sit quaerat sit et eum. Quasi dolor voluptatem illum eum qui est expedita sequi accusamus.",
-        //     "emergency": false,
-        //     "dateCompleted": ""
-        // }
         // TODO: Create the object to be saved to the API
-        const ticketToSendToAPI = {
-            userId: honeyUserObject.id,
-            description: ticket.description,
-            emergency: ticket.emergency,
-            dateCompleted: ""
-        }
+
+    // "userId": 3,
+    // "description": "Vero est adipisci sed natus quasi consectetur occaecati. Modi maxime sunt officia cumque. Vel at culpa. Sint accusamus deserunt dolorem qui.",
+    // "emergency": true,
+    // "dateCompleted": ""
+
+    const ticketToSendToAPI = {
+        userId: honeyUserObject.id,
+        description: ticket.description,
+        emergency: ticket.emergency,
+        dateCompleted: ""
+    }
 
         // TODO: Perform the fetch() to POST the object to the API
-        return fetch(`http://localhost:8088/serviceTickets`,{
+        return fetch(`http://localhost:8088/serviceTickets`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -48,6 +47,7 @@ export const TicketForm = () => {
         .then(response => response.json())
         .then(() => {
             navigate("/tickets")
+
         })
     }
 
@@ -66,7 +66,7 @@ export const TicketForm = () => {
                         onChange={
                             (evt) => {
                                 const copy = {...ticket}
-                                copy.description = evt.target.value 
+                                copy.description = evt.target.value
                                 update(copy)
                             }
                         } />
@@ -86,8 +86,9 @@ export const TicketForm = () => {
                         } />
                 </div>
             </fieldset>
-            <button 
+            <button
             onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+            
             className="btn btn-primary">
                 Submit Ticket
             </button>
